@@ -20,3 +20,7 @@ ALTER TABLE "user" ENABLE TRIGGER ALL;
 ALTER TABLE "user_follow_show" ENABLE TRIGGER ALL;
 ALTER TABLE "user_rate_show" ENABLE TRIGGER ALL;
 ALTER TABLE "user_watch_episode" ENABLE TRIGGER ALL;
+
+CREATE EXTENSION pgcrypto;
+UPDATE "user" SET password=crypt(password,gen_salt('bf'));
+SELECT user_id FROM "user" WHERE password = crypt('eosaut901', password);

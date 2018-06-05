@@ -21,11 +21,11 @@ CREATE TABLE episode (
 
 CREATE TABLE "user" (
  user_id INTEGER PRIMARY KEY NOT NULL,
- registration_date DATE,
+ registration_date DATE CHECK(registration_date <= CURRENT_DATE),
  firstname VARCHAR(255),
  lastname VARCHAR(255),
- email VARCHAR(255),
- password VARCHAR(255)
+ email VARCHAR(255) CHECK(email LIKE '%@%'),
+ password TEXT
 );
 
 CREATE TABLE user_follow_show (
@@ -44,6 +44,6 @@ CREATE TABLE user_rate_show (
 CREATE TABLE user_watch_episode (
  user_id INTEGER NOT NULL REFERENCES "user"(user_id),
  episode_id INTEGER NOT NULL REFERENCES episode(episode_id),
- watch_date DATE
+ watch_date DATE CHECK(watch_date <= CURRENT_DATE)
 );
 
